@@ -1,18 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.lingxiao.webmastertool.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
+    <include layout="@layout/title_bar" />
+    <com.github.mzule.fantasyslide.FantasyDrawerLayout
+        android:id="@+id/menu_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_domain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <EditText
+                android:id="@+id/et_domain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_domain"/>
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/bt_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_commit"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <com.github.mzule.fantasyslide.SideBar
+        android:id="@+id/left_sidebar"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimary"
+        app:maxTranslationX="66dp">
+        <TextView
+            style="@style/MenuTextColor"
+            android:text="seo信息查询"/>
+        <TextView
+            style="@style/MenuTextColor"
+            android:text="网站信息查询"/>
+        <TextView
+            style="@style/MenuTextColor"
+            android:text="域名/IP查询"/>
+        <TextView
+            style="@style/MenuTextColor"
+            android:text="其他工具"/>
+    </com.github.mzule.fantasyslide.SideBar>
+
+    </com.github.mzule.fantasyslide.FantasyDrawerLayout>
+</LinearLayout>

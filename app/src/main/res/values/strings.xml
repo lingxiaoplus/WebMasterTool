@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WebMasterTool</string>
+    <string name="input_domain">请输入域名</string>
+    <string name="button_commit">确认</string>
 </resources>
