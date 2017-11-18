@@ -20,23 +20,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
-    @BindView(R.id.et_domain)
-    EditText etDomain;
-    @BindView(R.id.input_domain)
-    TextInputLayout inputDomain;
-    @BindView(R.id.bt_commit)
-    Button btCommit;
     @BindView(R.id.left_sidebar)
     SideBar leftSidebar;
     @BindView(R.id.menu_layout)
     FantasyDrawerLayout menuLayout;
     @BindView(R.id.rv_main)
     RecyclerView rvMain;
-    private String domainName;
+
     private GridLayoutManager mLayoutManager;
 
     @Override
@@ -92,15 +86,5 @@ public class MainActivity extends AppCompatActivity {
         rvMain.setAdapter(mAdapter);
     }
 
-    @OnClick(R.id.bt_commit)
-    public void onCommit() {
-        domainName = etDomain.getText().toString().trim();
-        if (domainName.isEmpty()) {
-            inputDomain.setErrorEnabled(true);
-            inputDomain.setError("域名格式不正确!");
-        } else {
-            inputDomain.setErrorEnabled(false);
-            inputDomain.setError("域名保存成功!");
-        }
-    }
+
 }
