@@ -1,4 +1,4 @@
-package com.lingxiao.webmastertool;
+package com.lingxiao.webmastertool.widget;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

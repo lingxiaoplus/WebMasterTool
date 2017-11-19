@@ -2,4 +2,12 @@
     <string name="app_name">WebMasterTool</string>
     <string name="input_domain">请输入域名</string>
     <string name="button_commit">确认</string>
+    <string name="seo_info">汉译为搜索引擎优化。搜索引擎优化是一种利用搜索引擎的搜索规则来提高目的网站在有关搜索引擎内的排名的方式</string>
+    <string name="ranking_info">百度排名是推广信息(关键词标题和创意内容描述出现在何处， 有出家和质量度共同决定（你产品关键词质量度与出价的自定义导致）因质量度与出价变化系统会实时调整排名，高质量度，高度吻合网民搜索需求的信息优先展示在首页左侧，余下结果依次展现在首页及翻页后右侧，</string>
+    <string name="whois_info">Whois 简单来说，就是一个用来查询域名是否已经被注册，以及注册域名的详细信息的数据库（如域名所有人、域名注册商、域名注册日期和过期日期等）。通过域名Whois服务器查询，可以查询域名归属者联系方式，以及注册和到期时间</string>
+    <string name="icp_info">网站ICP备案查询，批量查询网站备案。查看网站是否已经备案及备案情况。</string>
+    <string name="ip_info">通过该工具可以查询指定IP的物理地址或域名服务器的IP和物理地址，及所在国家或城市，甚至精确到某个网吧，机房或学校等；查出的结果仅供参考！数字地址：即IP地址的数字化形式，复制在浏览器中访问就和访问IP一样</string>
+    <string name="pr_info">PR值全称为PageRank(网页级别)，PR值是Google用于标识网页的等级、重要性、网站的好坏的重要标准之一。级别从0到10级为满分。PR值越高说明该网页越受欢迎。</string>
+    <string name="blogroll_info">通过本工具可以批量查询指定网站的友情链接在百度的收录、百度快照、PR以及对方是否链接本站，可以识破骗链接。</string>
+    <string name="link_info">反向链接：指对方网站上有指向当前查询页面的链接。</string>
 </resources>

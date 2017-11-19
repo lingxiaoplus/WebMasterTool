@@ -27,9 +27,17 @@ public class MainRecycleAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ((MainViewHolder)holder).textView.setText(mStr[position]);
         ((MainViewHolder)holder).imageView.setImageResource(mImages[position]);
+        ((MainViewHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null){
+                    onItemClickListener.onItemClick(view,position);
+                }
+            }
+        });
     }
 
     @Override
@@ -45,5 +53,15 @@ public class MainRecycleAdapter extends RecyclerView.Adapter{
             imageView = itemView.findViewById(R.id.iv_menu_item);
             textView = itemView.findViewById(R.id.tv_menu_item);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View View, int position);
+    }
+
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

@@ -12,17 +12,89 @@
         android:id="@+id/menu_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
+
+        <com.lingxiao.webmastertool.widget.CardLayout
+            android:id="@+id/card_seo"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardName="seo查询"
+            app:cardDes="@string/seo_info"
+            app:cardBackground="@color/cardPink">
+        </com.lingxiao.webmastertool.widget.CardLayout>
+        <com.lingxiao.webmastertool.widget.CardLayout
+            android:id="@+id/card_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardName="百度排名"
+            app:cardDes="@string/ranking_info"
+            app:cardBackground="@color/cardPurple">
+        </com.lingxiao.webmastertool.widget.CardLayout>
+        <com.lingxiao.webmastertool.widget.CardLayout
+            android:id="@+id/card_whois"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardName="whois查询"
+            app:cardDes="@string/whois_info"
+            app:cardBackground="@color/cardBlue"
+            >
+        </com.lingxiao.webmastertool.widget.CardLayout>
+        <com.lingxiao.webmastertool.widget.CardLayout
+            android:id="@+id/card_icp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardName="网站备案"
+            app:cardDes="@string/icp_info"
+            app:cardBackground="@color/cardLightBlue">
+        </com.lingxiao.webmastertool.widget.CardLayout>
+        <com.lingxiao.webmastertool.widget.CardLayout
+            android:id="@+id/card_ip"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardName="IP查询"
+            app:cardDes="@string/ip_info"
+            app:cardBackground="@color/cardCyan">
+        </com.lingxiao.webmastertool.widget.CardLayout>
+        <com.lingxiao.webmastertool.widget.CardLayout
+            android:id="@+id/card_pr"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardName="PR查询"
+            app:cardDes="@string/pr_info"
+            app:cardBackground="@color/cardTeal">
+        </com.lingxiao.webmastertool.widget.CardLayout>
+        <com.lingxiao.webmastertool.widget.CardLayout
+            android:id="@+id/card_blogroll"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardName="友情链接"
+            app:cardDes="@string/blogroll_info"
+            app:cardBackground="@color/cardGreen">
+        </com.lingxiao.webmastertool.widget.CardLayout>
+        <com.lingxiao.webmastertool.widget.CardLayout
+            android:id="@+id/card_link"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardName="反链查询"
+            app:cardDes="@string/link_info"
+            app:cardBackground="@color/cardLightGreen">
+        </com.lingxiao.webmastertool.widget.CardLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
+    </ScrollView>
     <com.github.mzule.fantasyslide.SideBar
         android:id="@+id/left_sidebar"
         android:layout_width="200dp"

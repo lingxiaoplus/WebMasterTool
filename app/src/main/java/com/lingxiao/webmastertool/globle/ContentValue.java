@@ -6,4 +6,5 @@ package com.lingxiao.webmastertool.globle;
 
 public class ContentValue {
     public static String DOMAIN = "";
+    public static String SEOINFO = "http://m.tool.chinaz.com/seo?host=";
 }

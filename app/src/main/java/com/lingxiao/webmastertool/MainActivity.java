@@ -2,19 +2,20 @@ package com.lingxiao.webmastertool;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import com.github.mzule.fantasyslide.FantasyDrawerLayout;
 import com.github.mzule.fantasyslide.FantasyListener;
 import com.github.mzule.fantasyslide.SideBar;
+import com.lingxiao.webmastertool.seo.SeoInfoActivity;
+import com.lingxiao.webmastertool.utils.SnackUtils;
+import com.lingxiao.webmastertool.widget.CardLayout;
+import com.lingxiao.webmastertool.widget.SpaceItemDecoration;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -78,13 +79,50 @@ public class MainActivity extends BaseActivity {
         });
         mDrawerToggle.syncState();
         menuLayout.setDrawerListener(mDrawerToggle);
-        mLayoutManager = new GridLayoutManager(this,3);
+        mLayoutManager = new GridLayoutManager(this, 3);
         rvMain.setLayoutManager(mLayoutManager);
         //添加间距
         rvMain.addItemDecoration(new SpaceItemDecoration(10));
         MainRecycleAdapter mAdapter = new MainRecycleAdapter();
         rvMain.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new MainRecycleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View View, int position) {
+                Toast.makeText(getApplicationContext(),
+                        "" + position, Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
     }
 
+    @OnClick({R.id.card_seo,R.id.card_ranking,
+            R.id.card_whois,R.id.card_icp,
+            R.id.card_ip,R.id.card_pr,
+            R.id.card_blogroll,R.id.card_link})
+    public void onCardClick(View view){
+        switch (view.getId()){
+            case R.id.card_seo:
+                StartActivity(SeoInfoActivity.class,false);
+                break;
+            case R.id.card_ranking:
+                SnackUtils.show("ranking",view);
+                break;
+            case R.id.card_whois:
+                SnackUtils.show("whois",view);
+                break;
+            case R.id.card_ip:
+                SnackUtils.show("ip",view);
+                break;
+            case R.id.card_pr:
+                break;
+            case R.id.card_blogroll:
+                break;
+            case R.id.card_link:
+                break;
+            default:
+                break;
+        }
+    }
 
 }
