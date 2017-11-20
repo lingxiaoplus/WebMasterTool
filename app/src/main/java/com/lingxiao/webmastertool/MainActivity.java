@@ -111,6 +111,8 @@ public class MainActivity extends BaseActivity {
             case R.id.card_whois:
                 SnackUtils.show("whois",view);
                 break;
+            case R.id.card_icp:
+                break;
             case R.id.card_ip:
                 SnackUtils.show("ip",view);
                 break;
