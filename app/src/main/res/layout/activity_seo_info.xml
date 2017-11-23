@@ -5,46 +5,126 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <include layout="@layout/title_bar" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/seo_swip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-    <include layout="@layout/title_bar"/>
-    <TextView
-        style="@style/textInfo"
-        android:text="基本信息:"/>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:cardElevation="@dimen/cardview_default_elevation">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/seo_title"
-                style="@style/textInfo" />
-            <TextView
-                android:id="@+id/seo_age"
-                style="@style/textInfo" />
-            <TextView
-                android:id="@+id/seo_keywords"
-                style="@style/textInfo" />
-            <TextView
-                android:id="@+id/seo_desc"
-                style="@style/textInfo" />
-            <TextView
-                android:id="@+id/seo_server"
-                style="@style/textInfo" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-        </LinearLayout>
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/textInfo"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="基本信息"
+                    android:layout_margin="5dp"/>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    app:cardElevation="@dimen/cardview_default_elevation">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            style="@style/textInfo"
+                            android:text="网站标题：" />
+
+                        <TextView
+                            android:id="@+id/seo_title"
+                            style="@style/textInfo" />
+
+                        <TextView
+                            style="@style/textInfo"
+                            android:text="域名年龄：" />
+
+                        <TextView
+                            android:id="@+id/seo_age"
+                            style="@style/textInfo" />
+
+                        <TextView
+                            style="@style/textInfo"
+                            android:text="关键词：" />
+
+                        <TextView
+                            android:id="@+id/seo_keywords"
+                            style="@style/textInfo" />
+
+                        <TextView
+                            style="@style/textInfo"
+                            android:text="描述：" />
+
+                        <TextView
+                            android:id="@+id/seo_desc"
+                            style="@style/textInfo" />
+
+                        <TextView
+                            style="@style/textInfo"
+                            android:text="服务器信息：" />
+
+                        <TextView
+                            android:id="@+id/seo_server"
+                            style="@style/textInfo" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <TextView
+                    style="@style/textInfo"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="SEO信息"
+                    android:layout_margin="5dp"/>
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardCornerRadius="@dimen/cardview_default_radius"
+                    app:cardElevation="@dimen/cardview_default_elevation">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp">
+                        <TextView
+                            style="@style/textInfo"
+                            android:text="百度权重：" />
+                        <ImageView
+                            android:id="@+id/seo_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/seo_link"
+                            style="@style/textInfo"
+                            android:text="反链数：" />
+                        <TextView
+                            android:id="@+id/seo_out"
+                            style="@style/textInfo"
+                            android:text="出站链接：" />
+                        <TextView
+                            android:id="@+id/seo_in"
+                            style="@style/textInfo"
+                            android:text="入站链接：" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

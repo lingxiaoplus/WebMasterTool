@@ -28,6 +28,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:26.+'
     // jsoup HTML parser library @ https://jsoup.org/
     compile 'org.jsoup:jsoup:1.11.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
