@@ -14,17 +14,17 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ProgressBar
-            android:id="@+id/pb_web"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
         <com.lingxiao.webmastertool.web.MyWebView
             android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
         </com.lingxiao.webmastertool.web.MyWebView>
+        <ProgressBar
+            android:id="@+id/pb_web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
     </FrameLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

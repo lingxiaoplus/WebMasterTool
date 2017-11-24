@@ -44,6 +44,9 @@ public class WebActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 pbWeb.setVisibility(View.INVISIBLE);
+                if (webSwip.isRefreshing()){
+                    webSwip.setRefreshing(false);
+                }
             }
         });
         webview.setOnKeyListener(new View.OnKeyListener() {

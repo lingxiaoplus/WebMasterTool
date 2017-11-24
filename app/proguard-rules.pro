@@ -19,3 +19,66 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# 代码混淆压缩比，在0和7之间，默认为5，一般不需要改
+-optimizationpasses 5
+
+# 混淆时不使用大小写混合，混淆后的类名为小写
+-dontusemixedcaseclassnames
+
+# 指定不去忽略非公共的库的类
+-dontskipnonpubliclibraryclasses
+
+# 指定不去忽略非公共的库的类的成员
+-dontskipnonpubliclibraryclassmembers
+
+# 不做预校验，preverify是proguard的4个步骤之一
+# Android不需要preverify，去掉这一步可加快混淆速度
+-dontpreverify
+
+# 有了verbose这句话，混淆后就会生成映射文件
+# 包含有类名->混淆后类名的映射关系
+# 然后使用printmapping指定映射文件的名称
+-verbose
+-printmapping proguardMapping.txt
+
+# 指定混淆时采用的算法，后面的参数是一个过滤器
+# 这个过滤器是谷歌推荐的算法，一般不改变
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+# 保留了继承自Activity、Application这些类的子类
+# 因为这些子类，都有可能被外部调用
+# 比如说，第一行就保证了所有Activity的子类不要被混淆
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class * extends android.view.View
+-keep public class com.android.vending.licensing.ILicensingService
+
+# 保留自定义控件（继承自View）不被混淆
+-keep public class * extends android.view.View {
+    *** get*();
+    void set*(***);
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+# 对于R（资源）下的所有类及其方法，都不能被混淆
+-keep class **.R$* {
+    *;
+}
+
+# 对于带有回调函数onXXEvent的，不能被混淆
+-keepclassmembers class * {
+    void *(**On*Event);
+}
+
+# 保留实体类和成员不被混淆
+-keep public class com.xxxx.entity.** {
+    public void set*(***);
+    public *** get*();
+    public *** is*();
+}

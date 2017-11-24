@@ -86,13 +86,6 @@
             app:cardDes="@string/link_info"
             app:cardBackground="@color/cardLightGreen">
         </com.lingxiao.webmastertool.widget.CardLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-
-        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
     </ScrollView>
     <com.github.mzule.fantasyslide.SideBar

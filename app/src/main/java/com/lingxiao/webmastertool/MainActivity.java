@@ -38,8 +38,6 @@ public class MainActivity extends BaseActivity {
     SideBar leftSidebar;
     @BindView(R.id.menu_layout)
     FantasyDrawerLayout menuLayout;
-    @BindView(R.id.rv_main)
-    RecyclerView rvMain;
     @BindView(R.id.ll_redomain)
     LinearLayout llRedomain;
     @BindView(R.id.tv_domain)
@@ -92,21 +90,6 @@ public class MainActivity extends BaseActivity {
         });
         mDrawerToggle.syncState();
         menuLayout.setDrawerListener(mDrawerToggle);
-        mLayoutManager = new GridLayoutManager(this, 3);
-        rvMain.setLayoutManager(mLayoutManager);
-        //添加间距
-        rvMain.addItemDecoration(new SpaceItemDecoration(10));
-        MainRecycleAdapter mAdapter = new MainRecycleAdapter();
-        rvMain.setAdapter(mAdapter);
-
-        mAdapter.setOnItemClickListener(new MainRecycleAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View View, int position) {
-                Toast.makeText(getApplicationContext(),
-                        "" + position, Toast.LENGTH_LONG)
-                        .show();
-            }
-        });
 
         tvDomain.setText(SpUtils.getString(this,ContentValue.DOMAIN,""));
         llRedomain.setOnClickListener(new View.OnClickListener() {
@@ -133,8 +116,9 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.card_whois:
+                intent.putExtra("url", ContentValue.WHOISINFO);
                 intent.putExtra("title","whois查询");
-                SnackUtils.show("whois", view);
+                startActivity(intent);
                 break;
             case R.id.card_icp:
                 intent.putExtra("url", ContentValue.ICPINFO);
@@ -172,20 +156,21 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.tv_info_find:
                 items = new String[]{"死链检测", "关键词密度", "META信息","PR输出值"};
-                showDialog(items);
+                showDomainInfoDialog(items);
                 break;
             case R.id.tv_domain_find:
-                items = new String[]{"域名删除", "同IP网站", "DNS查询","NsLookup","子域名查询"};
-                showDialog(items);
+                items = new String[]{"域名删除", "同IP网站", "子域名查询"};
+                showIPDialog(items);
                 break;
             case R.id.tv_domain_other:
                 items = new String[]{"超级ping", "路由器追踪", "HTTP状态","端口扫描"};
-                showDialog(items);
+                showOtherDialog(items);
                 break;
             default:
                 break;
         }
     }
+
     private void showInputDialog() {
     /*@setView 装入一个EditView
      */
@@ -223,5 +208,101 @@ public class MainActivity extends BaseActivity {
             }
         });
         builder.show();
+    }
+
+    private void showIPDialog(String[] items) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("请选择工具");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(MainActivity.this,WebActivity.class);
+                if (i == 0){
+                    intent.putExtra("url", ContentValue.DOMAINDEL);
+                    intent.putExtra("title","域名删除");
+                }else if (i == 1){
+                    intent.putExtra("url", ContentValue.SAME);
+                    intent.putExtra("title","同ip网站");
+                }else if (i == 2){
+                    intent.putExtra("url", ContentValue.SUBDOMAIN);
+                    intent.putExtra("title","子域名查询");
+                }
+                startActivity(intent);
+            }
+        });
+        builder.show();
+    }
+
+    private void showOtherDialog(String[] items) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("请选择工具");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(MainActivity.this,WebActivity.class);
+                if (i == 0){
+                    intent.putExtra("url", ContentValue.PING);
+                    intent.putExtra("title","超级ping");
+                }else if (i == 1){
+                    intent.putExtra("url", ContentValue.TRACERT);
+                    intent.putExtra("title","路由器追踪");
+                }else if (i == 2){
+                    intent.putExtra("url", ContentValue.PAGESTATUS);
+                    intent.putExtra("title","HTTP状态");
+                }else if (i == 3){
+                    intent.putExtra("url", ContentValue.PORT);
+                    intent.putExtra("title","端口扫描");
+                }
+                startActivity(intent);
+            }
+        });
+        builder.show();
+    }
+    private void showDomainInfoDialog(String[] items) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("请选择工具");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(MainActivity.this,WebActivity.class);
+                if (i == 0){
+                    intent.putExtra("url", ContentValue.DEADLINKINFO);
+                    intent.putExtra("title","死链检测");
+                    startActivity(intent);
+                }else if (i == 1){
+                    showKeyWorldsDia();
+                }else if (i == 2){
+                    intent.putExtra("url", ContentValue.METACHECKINFO);
+                    intent.putExtra("title","META信息");
+                    startActivity(intent);
+                }else if (i == 3){
+                    intent.putExtra("url", ContentValue.EXPORTPRINFO);
+                    intent.putExtra("title","PR输出值");
+                    startActivity(intent);
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void showKeyWorldsDia() {
+        final EditText editText = new EditText(MainActivity.this);
+        editText.setHint("请输入要查询的关键字");
+        AlertDialog.Builder inputDialog =
+                new AlertDialog.Builder(MainActivity.this);
+        inputDialog.setTitle("请输入关键字").setView(editText);
+        inputDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainActivity.this,WebActivity.class);
+                        intent.putExtra("url", ContentValue.
+                                DENSITYKEYWORLD +
+                                editText.getText().toString().trim() +
+                                ContentValue.DENSITYKURL);
+                        intent.putExtra("title","关键词密度");
+                        startActivity(intent);
+                    }
+                }).show();
     }
 }
