@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context="com.lingxiao.webmastertool.MainActivity">
     <include layout="@layout/title_bar" />
-    <com.github.mzule.fantasyslide.FantasyDrawerLayout
+    <android.support.v4.widget.DrawerLayout
         android:id="@+id/menu_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -88,45 +88,15 @@
         </com.lingxiao.webmastertool.widget.CardLayout>
     </LinearLayout>
     </ScrollView>
-    <com.github.mzule.fantasyslide.SideBar
-        android:id="@+id/left_sidebar"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/left_navigat"
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorPrimary"
-        app:maxTranslationX="66dp">
-        <LinearLayout
-            android:id="@+id/ll_redomain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:clickable="true">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_head"
-                android:clickable="false"/>
-            <TextView
-                android:id="@+id/tv_domain"
-                android:clickable="false"
-                style="@style/MenuTextColor"
-                android:text="网站"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tv_info_find"
-            style="@style/MenuTextColor"
-            android:text="网站信息查询"/>
-        <TextView
-            android:id="@+id/tv_domain_find"
-            style="@style/MenuTextColor"
-            android:text="域名/IP查询"/>
-        <TextView
-            android:id="@+id/tv_domain_other"
-            style="@style/MenuTextColor"
-            android:text="其他工具"/>
-    </com.github.mzule.fantasyslide.SideBar>
-
-    </com.github.mzule.fantasyslide.FantasyDrawerLayout>
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"
+        app:maxTranslationX="66dp"
+        />
+    </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

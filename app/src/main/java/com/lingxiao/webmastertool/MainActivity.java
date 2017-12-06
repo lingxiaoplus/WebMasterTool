@@ -5,43 +5,39 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.mzule.fantasyslide.FantasyDrawerLayout;
-import com.github.mzule.fantasyslide.FantasyListener;
-import com.github.mzule.fantasyslide.SideBar;
 import com.lingxiao.webmastertool.globle.ContentValue;
 import com.lingxiao.webmastertool.seo.SeoInfoActivity;
-import com.lingxiao.webmastertool.utils.SnackUtils;
 import com.lingxiao.webmastertool.utils.SpUtils;
 import com.lingxiao.webmastertool.utils.UIUtils;
 import com.lingxiao.webmastertool.web.WebActivity;
-import com.lingxiao.webmastertool.widget.SpaceItemDecoration;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
-    @BindView(R.id.left_sidebar)
-    SideBar leftSidebar;
     @BindView(R.id.menu_layout)
-    FantasyDrawerLayout menuLayout;
-    @BindView(R.id.ll_redomain)
-    LinearLayout llRedomain;
+    DrawerLayout menuLayout;
     @BindView(R.id.tv_domain)
     TextView tvDomain;
+    @BindView(R.id.left_navigat)
+    NavigationView leftNavigat;
+    @BindView(R.id.circleImg)
+    CircleImageView circleImageView;
 
     private GridLayoutManager mLayoutManager;
 
@@ -72,27 +68,11 @@ public class MainActivity extends BaseActivity {
                 super.onDrawerClosed(drawerView);
             }
         };
-        leftSidebar.setFantasyListener(new FantasyListener() {
-            @Override
-            public boolean onHover(@Nullable View view) {
-                return false;
-            }
-
-            @Override
-            public boolean onSelect(View view) {
-                return false;
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-        });
         mDrawerToggle.syncState();
         menuLayout.setDrawerListener(mDrawerToggle);
 
-        tvDomain.setText(SpUtils.getString(this,ContentValue.DOMAIN,""));
-        llRedomain.setOnClickListener(new View.OnClickListener() {
+        tvDomain.setText(SpUtils.getString(this, ContentValue.DOMAIN, ""));
+        circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showInputDialog();
@@ -112,37 +92,37 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.card_ranking:
                 intent.putExtra("url", ContentValue.RANKING);
-                intent.putExtra("title","百度排名");
+                intent.putExtra("title", "百度排名");
                 startActivity(intent);
                 break;
             case R.id.card_whois:
                 intent.putExtra("url", ContentValue.WHOISINFO);
-                intent.putExtra("title","whois查询");
+                intent.putExtra("title", "whois查询");
                 startActivity(intent);
                 break;
             case R.id.card_icp:
                 intent.putExtra("url", ContentValue.ICPINFO);
-                intent.putExtra("title","网站备案");
+                intent.putExtra("title", "网站备案");
                 startActivity(intent);
                 break;
             case R.id.card_ip:
                 intent.putExtra("url", ContentValue.IPINFO);
-                intent.putExtra("title","IP查询");
+                intent.putExtra("title", "IP查询");
                 startActivity(intent);
                 break;
             case R.id.card_pr:
                 intent.putExtra("url", ContentValue.PRINFO);
-                intent.putExtra("title","PR查询");
+                intent.putExtra("title", "PR查询");
                 startActivity(intent);
                 break;
             case R.id.card_blogroll:
                 intent.putExtra("url", ContentValue.BLOGINFO);
-                intent.putExtra("title","友情链接");
+                intent.putExtra("title", "友情链接");
                 startActivity(intent);
                 break;
             case R.id.card_link:
                 intent.putExtra("url", ContentValue.LINKINFO);
-                intent.putExtra("title","反链查询");
+                intent.putExtra("title", "反链查询");
                 startActivity(intent);
                 break;
             default:
@@ -150,12 +130,12 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.tv_info_find,R.id.tv_domain_find,R.id.tv_domain_other})
-    public void onSlideClick(View view){
+    @OnClick({R.id.tv_info_find, R.id.tv_domain_find, R.id.tv_domain_other})
+    public void onSlideClick(View view) {
         String[] items;
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_info_find:
-                items = new String[]{"死链检测", "关键词密度", "META信息","PR输出值"};
+                items = new String[]{"死链检测", "关键词密度", "META信息", "PR输出值"};
                 showDomainInfoDialog(items);
                 break;
             case R.id.tv_domain_find:
@@ -163,7 +143,7 @@ public class MainActivity extends BaseActivity {
                 showIPDialog(items);
                 break;
             case R.id.tv_domain_other:
-                items = new String[]{"超级ping", "路由器追踪", "HTTP状态","端口扫描"};
+                items = new String[]{"超级ping", "路由器追踪", "HTTP状态", "端口扫描"};
                 showOtherDialog(items);
                 break;
             default:
@@ -176,7 +156,7 @@ public class MainActivity extends BaseActivity {
      */
         final EditText editText = new EditText(MainActivity.this);
         editText.setHint("请输入域名");
-        editText.setText(SpUtils.getString(this,ContentValue.DOMAIN,""));
+        editText.setText(SpUtils.getString(this, ContentValue.DOMAIN, ""));
         AlertDialog.Builder inputDialog =
                 new AlertDialog.Builder(MainActivity.this);
         inputDialog.setTitle("请输入域名").setView(editText);
@@ -185,10 +165,10 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this,
-                                "修改域名："+editText.getText().toString(),
+                                "修改域名：" + editText.getText().toString(),
                                 Toast.LENGTH_SHORT).show();
-                        SpUtils.putString(UIUtils.getContext(),ContentValue.DOMAIN
-                        ,editText.getText().toString());
+                        SpUtils.putString(UIUtils.getContext(), ContentValue.DOMAIN
+                                , editText.getText().toString());
                     }
                 }).show();
         inputDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -198,7 +178,8 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-    private void showDialog(String[] items){
+
+    private void showDialog(String[] items) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("请选择工具");
         builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -216,16 +197,16 @@ public class MainActivity extends BaseActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(MainActivity.this,WebActivity.class);
-                if (i == 0){
+                Intent intent = new Intent(MainActivity.this, WebActivity.class);
+                if (i == 0) {
                     intent.putExtra("url", ContentValue.DOMAINDEL);
-                    intent.putExtra("title","域名删除");
-                }else if (i == 1){
+                    intent.putExtra("title", "域名删除");
+                } else if (i == 1) {
                     intent.putExtra("url", ContentValue.SAME);
-                    intent.putExtra("title","同ip网站");
-                }else if (i == 2){
+                    intent.putExtra("title", "同ip网站");
+                } else if (i == 2) {
                     intent.putExtra("url", ContentValue.SUBDOMAIN);
-                    intent.putExtra("title","子域名查询");
+                    intent.putExtra("title", "子域名查询");
                 }
                 startActivity(intent);
             }
@@ -239,45 +220,46 @@ public class MainActivity extends BaseActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(MainActivity.this,WebActivity.class);
-                if (i == 0){
+                Intent intent = new Intent(MainActivity.this, WebActivity.class);
+                if (i == 0) {
                     intent.putExtra("url", ContentValue.PING);
-                    intent.putExtra("title","超级ping");
-                }else if (i == 1){
+                    intent.putExtra("title", "超级ping");
+                } else if (i == 1) {
                     intent.putExtra("url", ContentValue.TRACERT);
-                    intent.putExtra("title","路由器追踪");
-                }else if (i == 2){
+                    intent.putExtra("title", "路由器追踪");
+                } else if (i == 2) {
                     intent.putExtra("url", ContentValue.PAGESTATUS);
-                    intent.putExtra("title","HTTP状态");
-                }else if (i == 3){
+                    intent.putExtra("title", "HTTP状态");
+                } else if (i == 3) {
                     intent.putExtra("url", ContentValue.PORT);
-                    intent.putExtra("title","端口扫描");
+                    intent.putExtra("title", "端口扫描");
                 }
                 startActivity(intent);
             }
         });
         builder.show();
     }
+
     private void showDomainInfoDialog(String[] items) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("请选择工具");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(MainActivity.this,WebActivity.class);
-                if (i == 0){
+                Intent intent = new Intent(MainActivity.this, WebActivity.class);
+                if (i == 0) {
                     intent.putExtra("url", ContentValue.DEADLINKINFO);
-                    intent.putExtra("title","死链检测");
+                    intent.putExtra("title", "死链检测");
                     startActivity(intent);
-                }else if (i == 1){
+                } else if (i == 1) {
                     showKeyWorldsDia();
-                }else if (i == 2){
+                } else if (i == 2) {
                     intent.putExtra("url", ContentValue.METACHECKINFO);
-                    intent.putExtra("title","META信息");
+                    intent.putExtra("title", "META信息");
                     startActivity(intent);
-                }else if (i == 3){
+                } else if (i == 3) {
                     intent.putExtra("url", ContentValue.EXPORTPRINFO);
-                    intent.putExtra("title","PR输出值");
+                    intent.putExtra("title", "PR输出值");
                     startActivity(intent);
                 }
             }
@@ -295,12 +277,12 @@ public class MainActivity extends BaseActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MainActivity.this,WebActivity.class);
+                        Intent intent = new Intent(MainActivity.this, WebActivity.class);
                         intent.putExtra("url", ContentValue.
                                 DENSITYKEYWORLD +
                                 editText.getText().toString().trim() +
                                 ContentValue.DENSITYKURL);
-                        intent.putExtra("title","关键词密度");
+                        intent.putExtra("title", "关键词密度");
                         startActivity(intent);
                     }
                 }).show();
