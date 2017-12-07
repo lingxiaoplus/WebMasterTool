@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,18 +28,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity{
 
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
     @BindView(R.id.menu_layout)
     DrawerLayout menuLayout;
-    @BindView(R.id.tv_domain)
-    TextView tvDomain;
     @BindView(R.id.left_navigat)
     NavigationView leftNavigat;
-    @BindView(R.id.circleImg)
-    CircleImageView circleImageView;
 
     private GridLayoutManager mLayoutManager;
 
@@ -71,13 +69,39 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle.syncState();
         menuLayout.setDrawerListener(mDrawerToggle);
 
+        leftNavigat.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                String[] items;
+                switch (item.getItemId()) {
+                    case R.id.tv_info_find:
+                        items = new String[]{"死链检测", "关键词密度", "META信息", "PR输出值"};
+                        showDomainInfoDialog(items);
+                        break;
+                    case R.id.tv_domain_find:
+                        items = new String[]{"域名删除", "同IP网站", "子域名查询"};
+                        showIPDialog(items);
+                        break;
+                    case R.id.tv_domain_other:
+                        items = new String[]{"超级ping", "路由器追踪", "HTTP状态", "端口扫描"};
+                        showOtherDialog(items);
+                        break;
+                    default:
+                        break;
+                }
+                menuLayout.closeDrawers();
+                return true;
+            }
+        });
+        /*TextView tvDomain = leftNavigat.findViewById(R.id.tv_menu_domain);
+        CircleImageView circleImageView = leftNavigat.findViewById(R.id.circleImg);
         tvDomain.setText(SpUtils.getString(this, ContentValue.DOMAIN, ""));
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showInputDialog();
             }
-        });
+        });*/
     }
 
     @OnClick({R.id.card_seo, R.id.card_ranking,
@@ -124,27 +148,6 @@ public class MainActivity extends BaseActivity {
                 intent.putExtra("url", ContentValue.LINKINFO);
                 intent.putExtra("title", "反链查询");
                 startActivity(intent);
-                break;
-            default:
-                break;
-        }
-    }
-
-    @OnClick({R.id.tv_info_find, R.id.tv_domain_find, R.id.tv_domain_other})
-    public void onSlideClick(View view) {
-        String[] items;
-        switch (view.getId()) {
-            case R.id.tv_info_find:
-                items = new String[]{"死链检测", "关键词密度", "META信息", "PR输出值"};
-                showDomainInfoDialog(items);
-                break;
-            case R.id.tv_domain_find:
-                items = new String[]{"域名删除", "同IP网站", "子域名查询"};
-                showIPDialog(items);
-                break;
-            case R.id.tv_domain_other:
-                items = new String[]{"超级ping", "路由器追踪", "HTTP状态", "端口扫描"};
-                showOtherDialog(items);
                 break;
             default:
                 break;
@@ -287,4 +290,5 @@ public class MainActivity extends BaseActivity {
                     }
                 }).show();
     }
+
 }

@@ -4,21 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:padding="10dp"
-    android:background="@color/colorPrimary">
+    android:gravity="center"
+    >
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImg"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_centerInParent="true"
         android:src="@drawable/ic_head"
         android:clickable="false"/>
     <TextView
-        android:id="@+id/tv_domain"
+        android:id="@+id/tv_menu_domain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="网站"
-        android:textColor="#FFF"
         android:textSize="14sp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"/>
@@ -26,9 +25,8 @@
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/tv_domain"
+        android:layout_above="@id/tv_menu_domain"
         android:text="@string/app_name"
-        android:textColor="#FFF"
         android:textSize="14sp"
         android:layout_marginLeft="5dp"/>
 </RelativeLayout>
