@@ -112,7 +112,10 @@ public class MainActivity extends BaseActivity{
         Intent intent = new Intent(getApplicationContext(), WebActivity.class);
         switch (view.getId()) {
             case R.id.card_seo:
-                StartActivity(SeoInfoActivity.class, false);
+                intent.putExtra("url", ContentValue.SEOINFO);
+                intent.putExtra("title", "seo查询");
+                startActivity(intent);
+                //StartActivity(SeoInfoActivity.class, false);
                 break;
             case R.id.card_ranking:
                 intent.putExtra("url", ContentValue.RANKING);

@@ -8,7 +8,7 @@ public class ContentValue {
     public static String DOMAIN = "";
     public static String BASE_URL = "http://m.tool.chinaz.com";
     //seo查询
-    public static String SEOINFO = BASE_URL +"/seo?host=";
+    public static String SEOINFO = "http://seo.chinaz.com/";
     //百度排名
     public static String RANKING = BASE_URL +"/baidusort?host=";
     //whois
@@ -44,7 +44,7 @@ public class ContentValue {
     //超级ping
     public static String PING = "http://ping.chinaz.com/";
     //路由器追踪
-    public static String TRACERT = BASE_URL + "/tracert/";
+    public static String TRACERT = "http://tool.chinaz.com/Tracert";
     //HTTP状态
     public static String PAGESTATUS ="http://tool.chinaz.com/pagestatus/?url=";
     //端口扫描
