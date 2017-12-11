@@ -7,6 +7,7 @@ package com.lingxiao.webmastertool.globle;
 public class ContentValue {
     public static String DOMAIN = "";
     public static String BASE_URL = "http://m.tool.chinaz.com";
+    public static String PC_BASE_URL = "http://tool.chinaz.com";
     //seo查询
     public static String SEOINFO = "http://seo.chinaz.com/";
     //百度排名
@@ -44,12 +45,20 @@ public class ContentValue {
     //超级ping
     public static String PING = "http://ping.chinaz.com/";
     //路由器追踪
-    public static String TRACERT = "http://tool.chinaz.com/Tracert";
+    public static String TRACERT = PC_BASE_URL + "/Tracert";
     //HTTP状态
-    public static String PAGESTATUS ="http://tool.chinaz.com/pagestatus/?url=";
+    public static String PAGESTATUS = PC_BASE_URL + "/pagestatus/?url=";
     //端口扫描
     public static String PORT = BASE_URL + "/port/?ports=" +
             "+80%2C8080%2C3128%2C8081%2C9080%2C1080%2C21" +
             "%2C23%2C443%2C69%2C22%2C25%2C110%2C7001%2" +
             "C9090%2C3389%2C1521%2C1158%2C2100%2C1433&host=";
+    //网站GZIP压缩
+    public static String GZIPS = PC_BASE_URL + "/Gzips/?q=";
+    //网站历史记录
+    public static String HISTORY = PC_BASE_URL + "/history/?ht=0&h=";
+    //竞争网站分析
+    public static String WEBSITEPK = PC_BASE_URL + "/websitepk.aspx?host=";
+    //网站安全检测
+    public static String WEBSAFE = PC_BASE_URL + "/webscan?host=";
 }

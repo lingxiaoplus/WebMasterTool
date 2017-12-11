@@ -69,6 +69,7 @@ public class MainActivity extends BaseActivity{
         mDrawerToggle.syncState();
         menuLayout.setDrawerListener(mDrawerToggle);
 
+        View headLayout = leftNavigat.inflateHeaderView(R.layout.nav_header);
         leftNavigat.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -82,6 +83,10 @@ public class MainActivity extends BaseActivity{
                         items = new String[]{"域名删除", "同IP网站", "子域名查询"};
                         showIPDialog(items);
                         break;
+                    case R.id.tv_domain_status:
+                        items = new String[]{"网站GZIP压缩", "网站历史记录", "竞争网站分析","网站安全检测"};
+                        showDomainStatusDialog(items);
+                        break;
                     case R.id.tv_domain_other:
                         items = new String[]{"超级ping", "路由器追踪", "HTTP状态", "端口扫描"};
                         showOtherDialog(items);
@@ -93,15 +98,45 @@ public class MainActivity extends BaseActivity{
                 return true;
             }
         });
-        /*TextView tvDomain = leftNavigat.findViewById(R.id.tv_menu_domain);
-        CircleImageView circleImageView = leftNavigat.findViewById(R.id.circleImg);
+
+        TextView tvDomain = headLayout.findViewById(R.id.tv_menu_domain);
         tvDomain.setText(SpUtils.getString(this, ContentValue.DOMAIN, ""));
+        CircleImageView circleImageView = headLayout.findViewById(R.id.circleImg);
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showInputDialog();
             }
-        });*/
+        });
+    }
+
+    private void showDomainStatusDialog(String[] items) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("请选择工具");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(MainActivity.this, WebActivity.class);
+                if (i == 0) {
+                    intent.putExtra("url", ContentValue.GZIPS);
+                    intent.putExtra("isPC",true);
+                    intent.putExtra("title", "网站GZIP压缩");
+                } else if (i == 1) {
+                    intent.putExtra("url", ContentValue.HISTORY);
+                    intent.putExtra("title", "网站历史记录");
+                } else if (i == 2) {
+                    intent.putExtra("url", ContentValue.WEBSITEPK);
+                    intent.putExtra("isPC",true);
+                    intent.putExtra("title", "竞争网站分析");
+                }else if (i == 3){
+                    intent.putExtra("url", ContentValue.WEBSAFE);
+                    intent.putExtra("isPC",true);
+                    intent.putExtra("title", "网站安全检测");
+                }
+                startActivity(intent);
+            }
+        });
+        builder.show();
     }
 
     @OnClick({R.id.card_seo, R.id.card_ranking,

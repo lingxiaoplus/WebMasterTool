@@ -95,8 +95,9 @@
         android:layout_gravity="start"
         android:background="@color/colorPrimary"
         app:menu="@menu/nav_menu"
-        app:headerLayout="@layout/nav_header"
         app:maxTranslationX="66dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         />
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
