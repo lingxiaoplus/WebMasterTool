@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -34,7 +35,7 @@ public class WebActivity extends BaseActivity {
     @BindView(R.id.web_swip)
     SwipeRefreshLayout webSwip;
     private String url;
-    private boolean isPC;
+    private boolean isPC,isAddDomain;
     private HashMap<String, String> extHeader;
 
     @Override
@@ -50,8 +51,9 @@ public class WebActivity extends BaseActivity {
         extHeader = new HashMap<String,String>();
         extHeader.put("User-Agent","Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36");
         if (isPC){
+            //String ua = webview.getSettings().getUserAgentString();
+            webview.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36");
             webview.loadUrl(url,extHeader);
-            Toast.makeText(this,"hahahha",Toast.LENGTH_SHORT).show();
         }else {
             webview.loadUrl(url);
         }
@@ -62,6 +64,14 @@ public class WebActivity extends BaseActivity {
                 if (webSwip.isRefreshing()){
                     webSwip.setRefreshing(false);
                 }
+            }
+        });
+
+        webview.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                pbWeb.setProgress(newProgress);
             }
         });
         webview.setOnKeyListener(new View.OnKeyListener() {
@@ -86,10 +96,14 @@ public class WebActivity extends BaseActivity {
         setSupportActionBar(toolbarTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        url = intent.getStringExtra("url")+
-                SpUtils.getString(this, ContentValue.DOMAIN,"");
-
         isPC = intent.getBooleanExtra("isPC",false);
+        isAddDomain = intent.getBooleanExtra("isAddDomain",true);
+        if (!isAddDomain){
+            url = intent.getStringExtra("url");
+        }else {
+            url = intent.getStringExtra("url")+
+                    SpUtils.getString(this, ContentValue.DOMAIN,"");
+        }
         webSwip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

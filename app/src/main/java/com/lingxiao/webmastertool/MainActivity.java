@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +24,8 @@ import com.lingxiao.webmastertool.seo.SeoInfoActivity;
 import com.lingxiao.webmastertool.utils.SpUtils;
 import com.lingxiao.webmastertool.utils.UIUtils;
 import com.lingxiao.webmastertool.web.WebActivity;
+
+import java.text.BreakIterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -121,22 +125,66 @@ public class MainActivity extends BaseActivity{
                     intent.putExtra("url", ContentValue.GZIPS);
                     intent.putExtra("isPC",true);
                     intent.putExtra("title", "网站GZIP压缩");
+                    startActivity(intent);
                 } else if (i == 1) {
                     intent.putExtra("url", ContentValue.HISTORY);
                     intent.putExtra("title", "网站历史记录");
+                    startActivity(intent);
                 } else if (i == 2) {
-                    intent.putExtra("url", ContentValue.WEBSITEPK);
-                    intent.putExtra("isPC",true);
-                    intent.putExtra("title", "竞争网站分析");
+                    inputWebsitePk();
+
                 }else if (i == 3){
                     intent.putExtra("url", ContentValue.WEBSAFE);
                     intent.putExtra("isPC",true);
                     intent.putExtra("title", "网站安全检测");
+                    startActivity(intent);
                 }
-                startActivity(intent);
+
             }
         });
         builder.show();
+    }
+
+    /**
+     *输入pk网站
+     */
+    private void inputWebsitePk() {
+        AlertDialog.Builder inputDialog =
+                new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog dialog = inputDialog.create();
+        View view = UIUtils.inflate(R.layout.dialog_website_pk);
+        //dialog.setView(view,0,0,0,0);
+        dialog.setView(view);
+        dialog.show();
+        final EditText pkHost = view.findViewById(R.id.et_website_pk);
+        Button enSure = view.findViewById(R.id.bt_pk_ensure);
+        Button canCle = view.findViewById(R.id.bt_pk_cancel);
+        final TextInputLayout textInputLayout = dialog.findViewById(R.id.text_input_layout);
+        enSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String hostStr = pkHost.getText().toString();
+                if (hostStr.isEmpty()){
+                    textInputLayout.setErrorEnabled(true);
+                    textInputLayout.setError("域名不能为空!");
+                }else {
+                    textInputLayout.setErrorEnabled(false);
+                    Intent intent = new Intent(MainActivity.this, WebActivity.class);
+                    intent.putExtra("url", ContentValue.WEBSITEPK+hostStr+"&host1=");
+                    intent.putExtra("isPC",true);
+                    intent.putExtra("title", "竞争网站分析");
+                    startActivity(intent);
+                }
+            }
+        });
+
+        canCle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
     }
 
     @OnClick({R.id.card_seo, R.id.card_ranking,
@@ -267,7 +315,10 @@ public class MainActivity extends BaseActivity{
                     intent.putExtra("title", "超级ping");
                 } else if (i == 1) {
                     intent.putExtra("url", ContentValue.TRACERT);
+                    intent.putExtra("isAddDomain",false);
                     intent.putExtra("title", "路由器追踪");
+                    Toast.makeText(getApplicationContext(),"目前需要手动输入域名",
+                            Toast.LENGTH_SHORT).show();
                 } else if (i == 2) {
                     intent.putExtra("url", ContentValue.PAGESTATUS);
                     intent.putExtra("title", "HTTP状态");

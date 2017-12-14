@@ -95,7 +95,6 @@
         android:layout_gravity="start"
         android:background="@color/colorPrimary"
         app:menu="@menu/nav_menu"
-        app:maxTranslationX="66dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         />

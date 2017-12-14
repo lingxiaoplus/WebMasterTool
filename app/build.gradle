@@ -6,8 +6,8 @@ android {
         applicationId "com.lingxiao.webmastertool"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,7 +25,6 @@ dependencies {
     compile 'com.android.support:design:26.+'
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.github.mzule.fantasyslide:library:1.0.3'  //侧滑菜单
     compile 'com.android.support:cardview-v7:26.+'
     // jsoup HTML parser library @ https://jsoup.org/
     compile 'org.jsoup:jsoup:1.11.1'
